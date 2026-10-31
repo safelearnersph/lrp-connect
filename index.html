@@ -1,113 +1,429 @@
+
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#123c58">
+<meta name="description" content="An independent educational information prototype about learner rights, child protection, and safer learning environments.">
 <title>LRP Connect | Learner Rights and Protection</title>
 <style>
-:root{--navy:#123c58;--teal:#176b79;--ink:#183344;--muted:#617582;--line:#dce6eb;--bg:#f4f8fa;--white:#fff;--pale:#eaf3f6}
-*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+:root{--navy:#123c58;--teal:#176b79;--ink:#183344;--muted:#617582;--line:#dce6eb;--bg:#f4f8fa;--white:#fff;--pale:#eaf3f6;--gold:#fff8e7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.58 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
 header{background:linear-gradient(120deg,var(--navy),var(--teal));color:white;padding:18px max(20px,calc((100% - 1100px)/2)) 34px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}.logo{background:#ffffff20;border:1px solid #ffffff50;border-radius:12px;padding:8px;font-size:25px}
-.hero{max-width:1100px;margin:35px auto 0}.eyebrow{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8}.hero h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.08;margin:10px 0}.hero p{max-width:650px;color:#e2eff3}
-nav{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;display:flex;gap:5px;overflow:auto;padding:10px max(12px,calc((100% - 1100px)/2))}
-nav button{white-space:nowrap;border:0;background:transparent;padding:10px 13px;border-radius:9px;color:var(--ink);font-weight:650;cursor:pointer}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}
+.logo{background:#ffffff20;border:1px solid #ffffff50;border-radius:12px;padding:8px;font-size:25px}
+.brand small{color:#dcebf0;letter-spacing:0}
+.hero{max-width:1100px;margin:35px auto 0}
+.eyebrow{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.hero h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.08;margin:10px 0}
+.hero p{max-width:700px;color:#e2eff3}
+nav{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;display:flex;gap:5px;overflow-x:auto;padding:10px max(12px,calc((100% - 1100px)/2));-webkit-overflow-scrolling:touch}
+nav button{white-space:nowrap;border:0;background:transparent;padding:10px 13px;border-radius:9px;color:var(--ink);font-weight:650;cursor:pointer;font:inherit;font-size:.9rem}
 nav button.active,nav button:hover{background:var(--pale);color:var(--teal)}
-main{max-width:1100px;margin:26px auto;padding:0 18px 50px}.page{display:none}.page.active{display:block}
-h2{font-size:1.65rem;margin:0 0 6px}h3{margin:0 0 7px}.lead,.muted{color:var(--muted)}
+main{max-width:1100px;margin:26px auto;padding:0 18px 50px}
+.page{display:none}
+.page.active{display:block}
+h2{font-size:1.65rem;line-height:1.25;margin:0 0 6px}
+h3{margin:0 0 7px;line-height:1.35}
+.lead,.muted{color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0}
 .card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 3px 12px #17394a08}
-.icon{font-size:1.8rem;margin-bottom:8px}.card p{color:var(--muted);font-size:.92rem}
+.card p{color:var(--muted);font-size:.94rem;margin-bottom:10px}
+.icon{font-size:1.8rem;margin-bottom:8px}
 .btn{display:inline-block;border:0;border-radius:9px;padding:11px 15px;background:var(--teal);color:white;font-weight:700;cursor:pointer;text-decoration:none}
 .btn.secondary{background:white;color:var(--teal);border:1px solid var(--line)}
-.notice{background:#fff8e7;border:1px solid #f0dfb4;border-radius:12px;padding:14px;color:#66501e;margin:18px 0;font-size:.9rem}
+.notice{background:var(--gold);border:1px solid #f0dfb4;border-radius:12px;padding:14px;color:#66501e;margin:18px 0;font-size:.92rem}
 .info{background:var(--pale);border-radius:12px;padding:16px;margin:18px 0}
+.tag{display:inline-block;background:#eaf3f6;border-radius:30px;padding:3px 9px;font-size:.75rem;margin-top:4px}
+.steps{counter-reset:step;list-style:none;padding:0;margin:12px 0}
+.steps li{counter-increment:step;position:relative;padding:4px 0 14px 42px}
+.steps li:before{content:counter(step);position:absolute;left:0;top:0;background:var(--pale);color:var(--teal);font-weight:800;border-radius:50%;width:29px;height:29px;display:grid;place-items:center}
+.resource-link{font-weight:650;color:var(--teal)}
 form{max-width:700px;background:white;border:1px solid var(--line);padding:18px;border-radius:14px}
 label{display:block;font-weight:650;font-size:.9rem;margin:13px 0 5px}
 input,select,textarea{width:100%;padding:11px;border:1px solid #cbd8df;border-radius:8px;background:white;font:inherit;color:var(--ink)}
-textarea{min-height:110px}small{color:var(--muted)}
-table{border-collapse:collapse;width:100%;background:white;border-radius:12px;overflow:hidden}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:.9rem}th{background:#edf4f6}
-.metric{font-size:2rem;font-weight:800;color:var(--teal)}.tag{display:inline-block;background:#eaf3f6;border-radius:30px;padding:3px 9px;font-size:.75rem}
+textarea{min-height:110px}
+input[type=checkbox]{width:auto}
+small{color:var(--muted)}
+table{border-collapse:collapse;width:100%;background:white;border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:.9rem}
+th{background:#edf4f6}
+.metric{font-size:2rem;font-weight:800;color:var(--teal)}
 footer{background:#102f43;color:#d7e5eb;padding:25px 18px;text-align:center;font-size:.85rem}
 .hidden{display:none!important}
-@media(max-width:600px){header{padding:16px 18px 28px}.hero{margin-top:25px}main{margin-top:20px}.grid{grid-template-columns:1fr 1fr}.card{padding:14px}.metric{font-size:1.6rem}}
+.subhead{margin-top:28px}
+.card ul{padding-left:20px;color:var(--muted);font-size:.92rem}
+.card li{margin:5px 0}
+@media(max-width:600px){
+header{padding:16px 18px 28px}
+.hero{margin-top:25px}
+main{margin-top:20px}
+.grid{grid-template-columns:1fr 1fr}
+.card{padding:14px}
+.metric{font-size:1.6rem}
+nav button{padding:9px 11px}
+}
+@media(max-width:380px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header>
- <div class="brand"><span class="logo">🛡️</span><span>LRP CONNECT<br><small style="color:#dcebf0">Learner Rights and Protection</small></span></div>
- <div class="hero"><div class="eyebrow">Independent educational prototype</div><h1>Protecting every learner.</h1><p>Know your rights. Recognize unsafe situations. Find trusted support. Help build a safe, inclusive, and caring learning environment.</p><button class="btn" onclick="showPage('rights')">Explore learner rights</button></div>
+ <div class="brand">
+  <span class="logo">🛡️</span>
+  <span>LRP CONNECT<br><small>Learner Rights and Protection</small></span>
+ </div>
+ <div class="hero">
+  <div class="eyebrow">Independent educational prototype</div>
+  <h1>Protecting every learner.</h1>
+  <p>Know your rights. Recognize unsafe situations. Find trusted support. Help build a safe, inclusive, and caring learning environment.</p>
+  <button class="btn" onclick="showPage('rights')">Explore learner rights</button>
+ </div>
 </header>
+
 <nav aria-label="Main navigation">
- <button class="active" data-page="home">Home</button><button data-page="rights">Learner Rights</button><button data-page="report">Report a Concern</button><button data-page="help">Get Help</button><button data-page="dashboard">Demo Dashboard</button><button data-page="resources">Resources</button>
+ <button class="active" data-page="home">Home</button>
+ <button data-page="rights">Learner Rights</button>
+ <button data-page="safety">Staying Safe</button>
+ <button data-page="report">Report a Concern</button>
+ <button data-page="help">Get Help</button>
+ <button data-page="dashboard">Demo Dashboard</button>
+ <button data-page="resources">Resources</button>
 </nav>
+
 <main>
+
 <section class="page active" id="home">
- <h2>Welcome to LRP Connect</h2><p class="lead">A digital information hub promoting learner rights, protection, and safer schools.</p>
+ <h2>Welcome to LRP Connect</h2>
+ <p class="lead">A digital information hub promoting learner rights, protection, and safer schools.</p>
+
  <div class="grid">
-  <article class="card"><div class="icon">📚</div><h3>Know Your Rights</h3><p>Explore child protection, anti-bullying, inclusion, and participation.</p><button class="btn secondary" onclick="showPage('rights')">Explore</button></article>
-  <article class="card"><div class="icon">🛡️</div><h3>Speak Up Safely</h3><p>Learn what to do when you or someone else may be unsafe.</p><button class="btn secondary" onclick="showPage('help')">Find support</button></article>
-  <article class="card"><div class="icon">🤝</div><h3>School Support</h3><p>Understand the roles of trusted adults and school support personnel.</p><button class="btn secondary" onclick="showPage('help')">Get help</button></article>
-  <article class="card"><div class="icon">📊</div><h3>Monitoring Demo</h3><p>Preview sample indicators for school and division monitoring.</p><button class="btn secondary" onclick="showPage('dashboard')">View demo</button></article>
+  <article class="card">
+   <div class="icon">📚</div>
+   <h3>Know Your Rights</h3>
+   <p>Explore child protection, anti-bullying, inclusion, and participation.</p>
+   <button class="btn secondary" onclick="showPage('rights')">Explore</button>
+  </article>
+
+  <article class="card">
+   <div class="icon">🛡️</div>
+   <h3>Stay Safe</h3>
+   <p>Learn practical steps for seeking help and responding to unsafe situations.</p>
+   <button class="btn secondary" onclick="showPage('safety')">Learn more</button>
+  </article>
+
+  <article class="card">
+   <div class="icon">🤝</div>
+   <h3>School Support</h3>
+   <p>Understand the roles of trusted adults and school support personnel.</p>
+   <button class="btn secondary" onclick="showPage('help')">Get help</button>
+  </article>
+
+  <article class="card">
+   <div class="icon">📊</div>
+   <h3>Monitoring Demo</h3>
+   <p>Preview fictional indicators for school and division monitoring.</p>
+   <button class="btn secondary" onclick="showPage('dashboard')">View demo</button>
+  </article>
  </div>
- <div class="info"><b>Our commitment</b><br>Every learner deserves dignity, respect, protection, and an environment where they can learn and participate safely.</div>
- <div class="notice"><b>Important:</b> This website is an independent demonstration, not an official DepEd service. Do not submit actual complaints or personal information through this prototype.</div>
+
+ <div class="info">
+  <b>Our commitment</b><br>
+  Every learner deserves dignity, respect, protection, and an environment where they can learn and participate safely.
+ </div>
+
+ <div class="notice">
+  <b>Important:</b> This website is an independent educational prototype, not an official DepEd service or reporting channel. Do not submit actual complaints, learner records, or personal information through this website.
+ </div>
 </section>
+
 <section class="page" id="rights">
- <h2>Learner Rights and Protection</h2><p class="lead">A brief introduction to important protections. Consult the full official issuances for exact requirements and procedures.</p>
+ <h2>Learner Rights and Protection</h2>
+ <p class="lead">These summaries introduce important protections in learner-friendly language. They do not replace the full laws, DepEd issuances, or official procedures.</p>
+
  <div class="grid">
-  <article class="card"><div class="icon">🧒</div><h3>Right to Protection</h3><p>Children must be protected from abuse, exploitation, violence, neglect, and other forms of harm.</p><span class="tag">RA 7610 • DepEd Order 40, s. 2012</span></article>
-  <article class="card"><div class="icon">🚫</div><h3>Protection from Bullying</h3><p>Schools have responsibilities to prevent and address bullying, including cyberbullying, under applicable rules.</p><span class="tag">RA 10627 • DepEd Order 55, s. 2013</span></article>
-  <article class="card"><div class="icon">🏫</div><h3>Safe Learning Environment</h3><p>Learning environments should support safety, dignity, inclusion, and learner well-being.</p><span class="tag">Check current DepEd issuances</span></article>
-  <article class="card"><div class="icon">⚖️</div><h3>Fair and Respectful Treatment</h3><p>Learners should be treated with dignity and without unjust discrimination.</p></article>
-  <article class="card"><div class="icon">🗣️</div><h3>Right to Be Heard</h3><p>Learners should have appropriate opportunities to express their views in matters affecting them.</p></article>
-  <article class="card"><div class="icon">🤲</div><h3>Right to Seek Help</h3><p>Learners should be able to approach trusted adults and appropriate protection channels.</p></article>
+  <article class="card">
+   <div class="icon">🧒</div>
+   <h3>Right to Protection</h3>
+   <p>Every child must be protected from abuse, exploitation, violence, neglect, and other forms of harm.</p>
+   <span class="tag">RA 7610 • DepEd Order 40, s. 2012</span>
+  </article>
+
+  <article class="card">
+   <div class="icon">🚫</div>
+   <h3>Protection from Bullying</h3>
+   <p>Schools are required to establish measures to prevent and address bullying, including cyberbullying, consistent with applicable rules.</p>
+   <span class="tag">RA 10627 • DepEd Order 55, s. 2013</span>
+  </article>
+
+  <article class="card">
+   <div class="icon">🏫</div>
+   <h3>Safe Learning Environment</h3>
+   <p>Learners should be able to study in an environment that promotes safety, dignity, respect, inclusion, and positive relationships.</p>
+   <span class="tag">See current DepEd issuances, including ESMLE policy</span>
+  </article>
+
+  <article class="card">
+   <div class="icon">⚖️</div>
+   <h3>Fair and Respectful Treatment</h3>
+   <p>Learners should be treated with dignity. Discipline should follow applicable rules and should not involve degrading or harmful treatment.</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">🗣️</div>
+   <h3>Right to Be Heard</h3>
+   <p>Learners should have appropriate opportunities to express their views and be listened to in matters that affect them.</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">🤲</div>
+   <h3>Right to Seek Help</h3>
+   <p>Learners should be able to approach trusted adults and appropriate school protection personnel when they need support.</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">♿</div>
+   <h3>Inclusion and Participation</h3>
+   <p>Schools should work toward accessible, inclusive learning environments where learners can participate and receive appropriate support.</p>
+  </article>
+
+  <article class="card">
+   <div class="icon">🔐</div>
+   <h3>Privacy and Confidentiality</h3>
+   <p>Personal information must be handled carefully and shared only through authorized processes and for legitimate purposes.</p>
+   <span class="tag">RA 10173 – Data Privacy Act of 2012</span>
+  </article>
+ </div>
+
+ <div class="notice">
+  <b>Remember:</b> A learner who reports a concern should be treated with respect. Avoid blaming, shaming, threatening, or pressuring a learner to repeat a difficult experience unnecessarily.
  </div>
 </section>
+
+<section class="page" id="safety">
+ <h2>Staying Safe and Seeking Support</h2>
+ <p class="lead">Simple guidance for learners, families, and school personnel. Follow the applicable school and child-protection procedures when responding to an actual concern.</p>
+
+ <div class="grid">
+  <article class="card">
+   <h3>If you feel unsafe</h3>
+   <ol class="steps">
+    <li>Move to a safer place if you can do so without increasing the danger.</li>
+    <li>Tell a trusted adult, such as a parent, guardian, teacher, or school protection personnel.</li>
+    <li>Explain what support you need. You may ask a trusted adult to accompany you.</li>
+    <li>If there is immediate danger, seek urgent help from appropriate emergency services or authorities.</li>
+   </ol>
+  </article>
+
+  <article class="card">
+   <h3>If another learner tells you about harm</h3>
+   <ul>
+    <li>Listen calmly and take the concern seriously.</li>
+    <li>Thank the learner for telling you.</li>
+    <li>Do not blame, interrogate, or promise absolute secrecy.</li>
+    <li>Connect the learner promptly with the designated school personnel and follow official procedures.</li>
+    <li>Share information only with people who need it to protect the learner and respond appropriately.</li>
+   </ul>
+  </article>
+
+  <article class="card">
+   <h3>Keep online spaces safer</h3>
+   <ul>
+    <li>Think before sharing personal information, photos, or location details.</li>
+    <li>Do not forward humiliating, threatening, or harmful content.</li>
+    <li>Use available platform safety tools when appropriate.</li>
+    <li>Tell a trusted adult about threats, harassment, or cyberbullying.</li>
+    <li>Do not retaliate or put yourself at risk to collect evidence.</li>
+   </ul>
+  </article>
+ </div>
+
+ <div class="notice">
+  <b>For school personnel:</b> This page is general awareness material, not an investigation guide. Do not conduct an informal investigation or confront an alleged offender based solely on this website. Follow current DepEd issuances, designated reporting lines, referral protocols, and applicable safeguarding procedures.
+ </div>
+</section>
+
 <section class="page" id="report">
- <h2>Demonstration Report Form</h2><p class="lead">This form is a visual demonstration only. It does not transmit, store, or route a report.</p>
- <div class="notice"><b>Do not enter real names, contact details, school identifiers, or incident details.</b> For an actual concern, speak directly with a trusted adult or the appropriate school child-protection personnel. If someone is in immediate danger, seek urgent help rather than waiting for a website.</div>
+ <h2>Demonstration Report Form</h2>
+ <p class="lead">This form is a visual demonstration only. It does not transmit, store, or route a report.</p>
+
+ <div class="notice">
+  <b>Do not enter real names, contact details, school identifiers, or incident details.</b> For an actual concern, speak directly with a trusted adult or the appropriate school child-protection personnel. If someone is in immediate danger, seek urgent help rather than waiting for a website.
+ </div>
+
  <form id="demoForm">
-  <label>Type of concern</label><select required><option value="">Choose a sample category</option><option>Bullying</option><option>Cyberbullying</option><option>Physical harm</option><option>Verbal harm</option><option>Discrimination</option><option>Other protection concern</option></select>
-  <label>General description (fictional example only)</label><textarea required placeholder="Use fictional details only"></textarea>
-  <label><input type="checkbox" required style="width:auto"> I understand this is a non-operational demo and I will not submit real personal or incident information.</label>
-  <p><button class="btn" type="submit">Preview demo form</button></p><p id="formMessage" class="info hidden" role="status">Demo preview completed. Nothing was sent or saved.</p>
+  <label for="sampleType">Type of concern (sample only)</label>
+  <select id="sampleType" required>
+   <option value="">Choose a sample category</option>
+   <option>Bullying</option>
+   <option>Cyberbullying</option>
+   <option>Physical harm</option>
+   <option>Verbal harm</option>
+   <option>Discrimination</option>
+   <option>Other protection concern</option>
+  </select>
+
+  <label for="sampleDescription">General description (fictional example only)</label>
+  <textarea id="sampleDescription" required placeholder="Use fictional details only"></textarea>
+
+  <label>
+   <input type="checkbox" required>
+   I understand this is a non-operational demo and I will not submit real personal or incident information.
+  </label>
+
+  <p><button class="btn" type="submit">Preview demo form</button></p>
+  <p id="formMessage" class="info hidden" role="status">Demo preview completed. Nothing was sent or saved.</p>
  </form>
 </section>
+
 <section class="page" id="help">
- <h2>Where to Get Help</h2><p class="lead">If you feel unsafe or are worried about another learner, contact a trusted adult.</p>
+ <h2>Where to Get Help</h2>
+ <p class="lead">If you feel unsafe or are worried about another learner, contact a trusted adult or the appropriate school personnel.</p>
+
  <div class="grid">
-  <article class="card"><h3>School Head</h3><p>Provides school leadership and helps ensure appropriate school response.</p></article>
-  <article class="card"><h3>Guidance Designate / Counselor</h3><p>May provide guidance support and help connect learners to appropriate services.</p></article>
-  <article class="card"><h3>School LRP / Child Protection Personnel</h3><p>Receives concerns through authorized school procedures and coordinates appropriate action.</p></article>
-  <article class="card"><h3>Trusted Adult</h3><p>A parent, guardian, teacher, or other responsible adult who can help you reach support.</p></article>
+  <article class="card">
+   <h3>School Head</h3>
+   <p>Provides school leadership and ensures that concerns are addressed through appropriate school procedures.</p>
+  </article>
+
+  <article class="card">
+   <h3>Guidance Designate / Counselor</h3>
+   <p>May provide guidance support, help assess support needs within their role, and connect learners to appropriate services.</p>
+  </article>
+
+  <article class="card">
+   <h3>School LRP / Child Protection Personnel</h3>
+   <p>Receives and refers concerns through authorized school procedures and coordinates appropriate action within assigned responsibilities.</p>
+  </article>
+
+  <article class="card">
+   <h3>Trusted Adult</h3>
+   <p>A parent, guardian, teacher, or other responsible adult who can listen and help a learner reach appropriate support.</p>
+  </article>
  </div>
- <div class="notice">If there is immediate danger, contact local emergency services or appropriate child-protection authorities. Do not rely on this website for emergency response.</div>
+
+ <div class="info">
+  <b>When sharing a concern:</b> Provide information through the authorized school channel. Avoid posting details on social media or sending sensitive information through unapproved websites or messaging groups.
+ </div>
+
+ <div class="notice">
+  If there is immediate danger, contact local emergency services or appropriate child-protection authorities. Do not rely on this website for emergency response.
+ </div>
 </section>
+
 <section class="page" id="dashboard">
- <h2>Monitoring Dashboard — Sample Only</h2><p class="lead">Fictional figures for interface demonstration. These are not actual division or school statistics.</p>
+ <h2>Monitoring Dashboard — Sample Only</h2>
+ <p class="lead">Fictional figures for interface demonstration. These are not actual division or school statistics and must not be used for official reporting.</p>
+
  <div class="grid">
-  <article class="card"><div class="metric">28</div><b>Sample reports</b></article><article class="card"><div class="metric">24</div><b>Sample resolved</b></article><article class="card"><div class="metric">4</div><b>Sample follow-ups</b></article><article class="card"><div class="metric">85.7%</div><b>Illustrative resolution rate</b></article>
+  <article class="card"><div class="metric">28</div><b>Sample reports</b></article>
+  <article class="card"><div class="metric">24</div><b>Sample resolved</b></article>
+  <article class="card"><div class="metric">4</div><b>Sample follow-ups</b></article>
+  <article class="card"><div class="metric">85.7%</div><b>Illustrative resolution rate</b></article>
  </div>
- <article class="card"><h3>Sample quarterly summary</h3><table><thead><tr><th>Quarter</th><th>Reported</th><th>Resolved</th></tr></thead><tbody><tr><td>Q1</td><td>8</td><td>7</td></tr><tr><td>Q2</td><td>11</td><td>8</td></tr><tr><td>Q3</td><td>9</td><td>9</td></tr></tbody></table></article>
- <div class="notice">A real case-management system requires institutional approval, secure authentication, strict role-based access, encryption, audit logs, retention controls, and a documented safeguarding and privacy process. Do not use this static demo for real cases.</div>
+
+ <article class="card">
+  <h3>Sample quarterly summary</h3>
+  <table>
+   <thead>
+    <tr><th>Quarter</th><th>Reported</th><th>Resolved</th></tr>
+   </thead>
+   <tbody>
+    <tr><td>Q1</td><td>8</td><td>7</td></tr>
+    <tr><td>Q2</td><td>11</td><td>8</td></tr>
+    <tr><td>Q3</td><td>9</td><td>9</td></tr>
+   </tbody>
+  </table>
+ </article>
+
+ <div class="notice">
+  A real case-management system requires institutional approval, privacy impact assessment as appropriate, secure authentication, role-based access, encryption, audit logs, retention and disposal controls, incident-response procedures, and documented safeguarding protocols. Do not use this static demo for real cases.
+ </div>
 </section>
+
 <section class="page" id="resources">
- <h2>Policy and Learning Resources</h2><p class="lead">Starting points for further reading. Verify the latest official versions and related issuances.</p>
+ <h2>Policy and Learning Resources</h2>
+ <p class="lead">Starting points for further reading. Use official sources to confirm the complete text, amendments, current effectivity, and related procedures.</p>
+
  <div class="grid">
-  <article class="card"><h3>DepEd Order No. 40, s. 2012</h3><p>DepEd Child Protection Policy.</p><a href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Visit DepEd website ↗</a></article>
-  <article class="card"><h3>Republic Act No. 10627</h3><p>Anti-Bullying Act of 2013.</p><a href="https://lawphil.net/" target="_blank" rel="noopener">Visit LawPhil ↗</a></article>
-  <article class="card"><h3>Republic Act No. 10173</h3><p>Data Privacy Act of 2012.</p><a href="https://privacy.gov.ph/" target="_blank" rel="noopener">National Privacy Commission ↗</a></article>
-  <article class="card"><h3>DepEd Official Website</h3><p>Official policies, issuances, and announcements.</p><a href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Open DepEd ↗</a></article>
+  <article class="card">
+   <h3>DepEd Order No. 40, s. 2012</h3>
+   <p>DepEd Child Protection Policy.</p>
+   <a class="resource-link" href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Visit DepEd website ↗</a>
+  </article>
+
+  <article class="card">
+   <h3>Republic Act No. 10627</h3>
+   <p>Anti-Bullying Act of 2013.</p>
+   <a class="resource-link" href="https://lawphil.net/" target="_blank" rel="noopener">Visit LawPhil ↗</a>
+  </article>
+
+  <article class="card">
+   <h3>DepEd Order No. 55, s. 2013</h3>
+   <p>Implementing Rules and Regulations of the Anti-Bullying Act of 2013.</p>
+   <a class="resource-link" href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Visit DepEd website ↗</a>
+  </article>
+
+  <article class="card">
+   <h3>Republic Act No. 7610</h3>
+   <p>Special Protection of Children Against Abuse, Exploitation and Discrimination Act.</p>
+   <a class="resource-link" href="https://lawphil.net/" target="_blank" rel="noopener">Visit LawPhil ↗</a>
+  </article>
+
+  <article class="card">
+   <h3>Republic Act No. 10173</h3>
+   <p>Data Privacy Act of 2012.</p>
+   <a class="resource-link" href="https://privacy.gov.ph/" target="_blank" rel="noopener">National Privacy Commission ↗</a>
+  </article>
+
+  <article class="card">
+   <h3>DepEd Order No. 006, s. 2026</h3>
+   <p>Guidelines on Ensuring a Safe and Motivating Learning Environment (ESMLE Policy). Check the official issuance for the complete provisions and current implementation guidance.</p>
+   <a class="resource-link" href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Visit DepEd website ↗</a>
+  </article>
+
+  <article class="card">
+   <h3>DepEd Official Website</h3>
+   <p>Official policies, issuances, and announcements.</p>
+   <a class="resource-link" href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Open DepEd ↗</a>
+  </article>
+ </div>
+
+ <div class="notice">
+  <b>Reference note:</b> The links above lead to official institutional websites or legal repositories, not necessarily to the exact document page. Search by the issuance number and title, and verify that you are reading the latest official version.
  </div>
 </section>
+
 </main>
-<footer><b>LRP CONNECT</b><br>Independent educational prototype • Not an official DepEd website or reporting channel.<br>Do not submit real learner records or confidential information.</footer>
+
+<footer>
+ <b>LRP CONNECT</b><br>
+ Independent educational prototype • Not an official DepEd website or reporting channel.<br>
+ Do not submit real learner records or confidential information.
+</footer>
+
 <script>
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
-document.getElementById('demoForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('formMessage').classList.remove('hidden');e.target.reset()});
+function showPage(id){
+ const target=document.getElementById(id);
+ if(!target)return;
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('nav button').forEach(b=>{
+ b.addEventListener('click',()=>showPage(b.dataset.page));
+});
+
+document.getElementById('demoForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ document.getElementById('formMessage').classList.remove('hidden');
+ e.target.reset();
+});
 </script>
+
 </body>
 </html>
